@@ -1,0 +1,31 @@
+.title{
+    font-weight: 600;
+    span{
+        font-weight: 300;
+        font-size: small;
+    }
+}
+.flex_container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    .task{
+        flex-grow: 1;
+        width: 100%;
+    }
+}
+.listcard_flex{
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 2.5vw;
+}
+.w3-card-4{
+    flex-grow: 1;
+    width: 20vw;
+}
+
+*{
+    word-break: break-all;
+    white-space: normal;
+}
