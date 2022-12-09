@@ -1,4 +1,4 @@
-var request;
+/*var request;
 
 $(".button").on(function(event){
     event.preventDefault();
@@ -36,4 +36,23 @@ $(".button").on(function(event){
         // Reenable the inputs
         $inputs.prop("disabled", false);
     });
+})*/
+$(".button").on(function(){
+function createAJAXRequestToPopulateList(category) {
+    return $.ajax({ url: '../index.php',
+                    data: {method: 'statusFilter',
+                           category: category},
+                    type: 'post'
+    });
+  }
+
+function addActivityItem(){
+    const selector = document.getElementById("categorySelector");
+   const ajaxRequest = createAJAXRequestToPopulateList(selector.options[selector.selectedIndex].value);
+    ajaxRequest.done(populateList);
+}
+
+function populateList(responseData) {
+    console.log(responseData);
+}
 })

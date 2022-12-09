@@ -3,15 +3,7 @@ include_once 'database.php';
 $todo = allTodo();
 $tasks;
 
-    if(isset($_POST['filterButton'])){
-        filterAscStatus();
-    } 
-    if(isset($_POST['filterDescButton'])){
-        filterDescStatus();
-    }
-    if(isset($_POST['filterActive'])){
-        filterStatus();
-    }
+    
 
 ?>
 
@@ -110,13 +102,25 @@ $tasks;
             <form method="post" action="#">
                 <input type="submit" name="filterButton" value="filterButton" class="w3-button button">
                 <input type="submit" name="filterDescButton" value="filterDescButton" class="w3-button button">
-                <input type="submit" name="filterActive" value="Active filter" class="w3-button button">
+                <input type="submit" name="filterActive" value="filterActive" class="w3-button button">
             </form>
         
             </header>
             <div class="w3-container flex-container" id="todoContainer<?php echo $value['id'];?>">
             <?php 
             $task = allTaskOrderdByList($value['id']);
+            if(isset($_POST['filterButton'])){
+                echo "AHOE";
+                filterAscStatus();
+            } 
+            if(isset($_POST['filterDescButton'])){
+                echo "Pog";
+                filterDescStatus();
+            }
+            if(isset($_POST['filterActive'])){
+                echo "HELLO";
+                filterStatus();
+            }
             foreach($task as $values):?>
             <div class="task" id="taskId<?php echo $values["id"]; ?>" data-taskName="<?php echo $values['name'];?>" data-taskTime="<?php echo $values['time'];?>" data-taskStatus="<?php echo $values['status']?>" data-todoListId="<?php echo $value["id"];?>">
                 <h3><?php echo $values["name"];?></h3>

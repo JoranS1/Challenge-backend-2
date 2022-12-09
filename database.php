@@ -104,6 +104,7 @@ function filterAscStatus(){
 	$query = $conn->prepare("SELECT * FROM task ORDER BY status ASC");
 	$query->execute();
 	$result = $query->fetchAll();
+	echo "Nani";
 	return $result;
 }
 function filterDescStatus(){
@@ -111,6 +112,7 @@ function filterDescStatus(){
 	$query = $conn->prepare("SELECT * FROM task ORDER BY status DESC");
 	$query->execute();
 	$result = $query->fetchAll();
+	echo "PEEPEE";
 	return $result;
 }
 function filterStatus(){
@@ -118,6 +120,7 @@ function filterStatus(){
 	$query = $conn->prepare("SELECT * FROM task WHERE status = 1");
 	$query->execute();
 	$result = $query->fetchAll();
+	echo "WORLD";
 	return $result;
 }
 /*
