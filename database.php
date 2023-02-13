@@ -99,29 +99,52 @@ function deleteTodo($id){
 	$query = $conn->prepare("DELETE FROM todo WHERE id = ?");
 	$query->execute([$id]);
 }
-function filterAscStatus(){
+function filterAscStatus($status){
+	switch($status){
+		case 0:
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM task ORDER BY status ASC");
-	$query->execute();
+	$query = $conn->prepare("SELECT * FROM task WHERE status = :status ORDER BY `task`.`status` ASC");
+	$query->execute([":status" => $status]);
 	$result = $query->fetchAll();
 	echo "Nani";
 	return $result;
+	break;
+	default:
+		echo "function is done";
+		break;
+	}
 }
-function filterDescStatus(){
+function filterDescStatus($status){
+	switch($status){
+		case 1:
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM task ORDER BY status DESC");
-	$query->execute();
+	$query = $conn->prepare("SELECT * FROM task WHERE status = :status ORDER BY `task`.`status` DESC");
+	$query->execute([":status" => $status]);
 	$result = $query->fetchAll();
 	echo "PEEPEE";
 	return $result;
+	break;
+	default:
+		echo "function is executed";
+		break;
+	}
 }
-function filterStatus(){
+function filterStatus($status){
+	switch($status){
+	case 0:
+	case 1:
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM task WHERE status = 1");
-	$query->execute();
+	$query = $conn->prepare("SELECT * FROM task WHERE status = :status ORDER BY `task`.`status`");
+	$query->execute([":status" => $status]);
 	$result = $query->fetchAll();
 	echo "WORLD";
 	return $result;
+	break;
+	default:
+		echo "function is proved that it works";
+		break;
+
+	}
 }
 /*
 function filterTime(){

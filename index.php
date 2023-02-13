@@ -99,7 +99,7 @@ $tasks;
             <button class="w3-btn" onclick="sortTodo(<?php echo $value['id']; ?>, 'status')">
             <i class="fa-fa-calendar-check-o" aria-hidden="true"></i>
             </button>
-            <form method="post" action="#">
+            <form method="get" action="#">
                 <input type="submit" name="filterButton" value="filterButton" class="w3-button button">
                 <input type="submit" name="filterDescButton" value="filterDescButton" class="w3-button button">
                 <input type="submit" name="filterActive" value="filterActive" class="w3-button button">
@@ -109,17 +109,17 @@ $tasks;
             <div class="w3-container flex-container" id="todoContainer<?php echo $value['id'];?>">
             <?php 
             $task = allTaskOrderdByList($value['id']);
-            if(isset($_POST['filterButton'])){
+            if(isset($_GET['filterButton'])){
                 echo "AHOE";
-                filterAscStatus();
+                filterAscStatus($task['status']);
             } 
-            if(isset($_POST['filterDescButton'])){
+            if(isset($_GET['filterDescButton'])){
                 echo "Pog";
-                filterDescStatus();
+                filterDescStatus($task['status']);
             }
-            if(isset($_POST['filterActive'])){
+            if(isset($_GET['filterActive'])){
                 echo "HELLO";
-                filterStatus();
+                filterStatus($task['status']);
             }
             foreach($task as $values):?>
             <div class="task" id="taskId<?php echo $values["id"]; ?>" data-taskName="<?php echo $values['name'];?>" data-taskTime="<?php echo $values['time'];?>" data-taskStatus="<?php echo $values['status']?>" data-todoListId="<?php echo $value["id"];?>">
