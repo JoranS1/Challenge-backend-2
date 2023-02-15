@@ -1,7 +1,7 @@
 <?php 
 function connAll(){ 
 	try{
-	$conn = new PDO('mysql:host=localhost;dbname=todolist','root', 'mysql');
+	$conn = new PDO('mysql:host=localhost;dbname=todolist2','root', 'mysql');
 	return $conn;
 }
 	catch(PDOException $e){
@@ -53,7 +53,7 @@ function addTodo($name){
 function addTask($name, $description,$time,$listId){
 	
 	$conn = connAll();
-	$query = $conn->prepare("INSERT INTO task (id, name, description, time, status, listId) VALUES (NULL, :name, :description, :time, 1, :listId)");
+	$query = $conn->prepare("INSERT INTO task (id, name, description, time, status, listId) VALUES (NULL, :name, :description, :time, 'active', :listId)");
 	$query -> execute([
 	':name' => $name,
 	':description' => $description,
@@ -101,9 +101,9 @@ function deleteTodo($id){
 }
 function filterAscStatus($status){
 	switch($status){
-		case 0:
+		case "inactive":
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM task WHERE status = :status ORDER BY `task`.`status` ASC");
+	$query = $conn->prepare("SELECT * FROM task WHERE status = :status ORDER BY status ASC");
 	$query->execute([":status" => $status]);
 	$result = $query->fetchAll();
 	echo "Nani";
@@ -116,9 +116,9 @@ function filterAscStatus($status){
 }
 function filterDescStatus($status){
 	switch($status){
-		case 1:
+		case "active":
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM task WHERE status = :status ORDER BY `task`.`status` DESC");
+	$query = $conn->prepare("SELECT * FROM task WHERE status = :status ORDER BY status DESC");
 	$query->execute([":status" => $status]);
 	$result = $query->fetchAll();
 	echo "PEEPEE";
@@ -131,10 +131,10 @@ function filterDescStatus($status){
 }
 function filterStatus($status){
 	switch($status){
-	case 0:
-	case 1:
+	case "inactive":
+	case "active":
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM task WHERE status = :status ORDER BY `task`.`status`");
+	$query = $conn->prepare("SELECT * FROM task WHERE status = :status ORDER BY id");
 	$query->execute([":status" => $status]);
 	$result = $query->fetchAll();
 	echo "WORLD";

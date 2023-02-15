@@ -127,7 +127,7 @@ $tasks;
                 <p><?php echo $values["description"];?></p>
                 <span class="w3-card w3-purple">Time: <?php echo $values["time"]; ?> min</span>
                 <span class="w3-tag w3-pink"><?php 
-                if ($values['status']){
+                if ($values['status'] === "active"){
                     echo "active";
                 }else{
                     echo "inactive";
@@ -154,11 +154,11 @@ $tasks;
                             <input type="number" name="taskTime" placeholder="Duration of the task (in minutes please)" class="w3-input w3-border" required value=<?php echo $values['time']?>>
                             <br>
                             <label for="status">Task Status</label>
-                            <input type="radio" name="taskStatus" value="1" <?php if($values['status']){
+                            <input type="radio" name="taskStatus" value="active" <?php if($values['status'] === "active"){
                                 echo 'Checked';
                             } ?>>
                             <label>Active</label><br>
-                            <input type="radio" name="taskStatus" value="0" <?php if(!$values['status']){
+                            <input type="radio" name="taskStatus" value="inactive" <?php if($values['status'] !== "active"){
                                 echo 'Checked';
                             } ?>>
                             <label>Inactive</label><br>
