@@ -64,6 +64,11 @@ $tasks;
     <div class="w3-container w3-center">
         <h2 class="title">Make your own todo list!</h2>
         <button class="w3-button w3-blue" onclick="modal('modalNewTodo', 'open')">Create a new todo list</button>
+        <form method="get" action="#">
+                <input type="submit" name="filterButton" value="filterButton" class="w3-button button w3-orange">
+                <input type="submit" name="active" value="active" class="w3-button button w3-green">
+                <input type="submit" name="inactive" value="inactive" class="w3-button button w3-red">
+            </form>
     </div>
     <hr>
     <div class="w3-container">
@@ -99,11 +104,7 @@ $tasks;
             <button class="w3-btn" onclick="sortTodo(<?php echo $value['id']; ?>, 'status')">
             <i class="fa-fa-calendar-check-o" aria-hidden="true"></i>
             </button>
-            <form method="get" action="#">
-                <input type="submit" name="filterButton" value="filterButton" class="w3-button button">
-                <input type="submit" name="filterDescButton" value="filterDescButton" class="w3-button button">
-                <input type="submit" name="filterActive" value="filterActive" class="w3-button button">
-            </form>
+            
         
             </header>
             <div class="w3-container flex-container" id="todoContainer<?php echo $value['id'];?>">
@@ -113,11 +114,11 @@ $tasks;
                 echo "AHOE";
                 filterAscStatus($task['status']);
             } 
-            if(isset($_GET['filterDescButton'])){
+            if(isset($_GET['inactive'])){
                 echo "Pog";
-                filterDescStatus($task['status']);
+                filterStatus($task['status']);
             }
-            if(isset($_GET['filterActive'])){
+            if(isset($_GET['active'])){
                 echo "HELLO";
                 filterStatus($task['status']);
             }

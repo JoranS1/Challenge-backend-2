@@ -134,7 +134,7 @@ function filterStatus($status){
 	case "inactive":
 	case "active":
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM task WHERE status = :status ORDER BY id");
+	$query = $conn->prepare("SELECT * FROM task ORDER BY FIELD(status, '$status'");
 	$query->execute([":status" => $status]);
 	$result = $query->fetchAll();
 	echo "WORLD";
