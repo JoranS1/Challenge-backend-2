@@ -17,7 +17,8 @@ $tasks;
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <title>Todo list</title>
 	<link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
     <script>
             function modal(elementID, openedClosed){
                 var elementName = document.getElementById(elementID);
@@ -30,13 +31,13 @@ $tasks;
 
             function sortTodo(todo, filter){
                 var todoItems = document.querySelectorAll("[data-todoListID='"+ todo + "']")
-                var sortTodo = [];
+                var sortItems = [];
                 for(let val of todoItems){
                     var currentIdName = val.id;
                     var currentTodoName = val.name;
-                    if(filter === "time"){
+                    if(filter == "time"){
                         var filterCheck = val.dataset.time;
-                    }else if(filter === "status"){
+                    }else if(filter == "status"){
                         var filterCheck = val.dataset.status;
                         if(filterCheck === "inactive"){
                             filterCheck.style.display = "none";
@@ -45,15 +46,15 @@ $tasks;
                         filterCheck = currentTodoName;
                     }
 
-                    sortTodo.push([currentIdName, filterCheck]);
+                    sortItems.push([currentIdName, filterCheck]);
                 }
-                    sortTodo.sort(function(a, b){
+                    sortItems.sort(function(a, b){
                         return a[1] - b[1];
                     });
 
-                    for(let i = 0; i < sortTodo.length; i++){
-                        console.log(sortTodo[i][0]);
-                        document.getElementById(sortTodo[i][0]).style.order = i;
+                    for(let i = 0; i < sortItems.length; i++){
+                        console.log(sortItems[i][0]);
+                        document.getElementById(sortItems[i][0]).style.order = i;
                     }
                 
             }
@@ -98,11 +99,11 @@ $tasks;
             <div class="w3-card-4" style="display:inline-block; position:relative; height:100%">
             <header class="w3-container w3-light-grey">
                 <h3><?php echo $value['name'];?></h3>
-            <button class="w3-btn" onclick="sortTodo(<?php echo $value['id']; ?>, 'time')">
-            <i class="fa-fa-clock" aria-hidden="true"></i>
+            <button class="w3-btn" value="time filter"name="timebtn" onclick="sortTodo(<?php echo $value['id']; ?>, 'time')">
+            <i class="fa-fa-clock" aria-hidden="true"></i>klok
         </button>
-            <button class="w3-btn" onclick="sortTodo(<?php echo $value['id']; ?>, 'status')">
-            <i class="fa-fa-calendar-check-o" aria-hidden="true"></i>
+            <button class="w3-btn" value="status filter" name="statusbtn" onclick="sortTodo(<?php echo $value['id']; ?>, 'status')">
+            <i class="fa-fa-calendar-check-o" aria-hidden="true"></i>kalender
             </button>
             
         
@@ -116,11 +117,11 @@ $tasks;
             } 
             if(isset($_GET['inactive'])){
                 echo "Pog";
-                filterStatus($task['status']);
+                filterDescStatus($task['status']);
             }
             if(isset($_GET['active'])){
                 echo "HELLO";
-                filterStatus($task['status']);
+                filterAscStatus($task['status']);
             }
             foreach($task as $values):?>
             <div class="task" id="taskId<?php echo $values["id"]; ?>" data-taskName="<?php echo $values['name'];?>" data-taskTime="<?php echo $values['time'];?>" data-taskStatus="<?php echo $values['status']?>" data-todoListId="<?php echo $value["id"];?>">

@@ -100,36 +100,22 @@ function deleteTodo($id){
 	$query->execute([$id]);
 }
 function filterAscStatus($status){
-	switch($status){
-		case "inactive":
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM task WHERE status = :status ORDER BY status ASC");
+	$query = $conn->prepare("SELECT * FROM `task` ORDER BY `task`.`status` ASC");
 	$query->execute([":status" => $status]);
 	$result = $query->fetchAll();
 	echo "Nani";
 	return $result;
-	break;
-	default:
-		echo "function is done";
-		break;
-	}
 }
 function filterDescStatus($status){
-	switch($status){
-		case "active":
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM task WHERE status = :status ORDER BY status DESC");
+	$query = $conn->prepare("SELECT * FROM `task` ORDER BY `task`.`status` DESC");
 	$query->execute([":status" => $status]);
 	$result = $query->fetchAll();
 	echo "PEEPEE";
 	return $result;
-	break;
-	default:
-		echo "function is executed";
-		break;
 	}
-}
-function filterStatus($status){
+/*function filterStatus($status){
 	switch($status){
 	case "inactive":
 	case "active":
@@ -139,13 +125,15 @@ function filterStatus($status){
 	$result = $query->fetchAll();
 	echo "WORLD";
 	return $result;
+	
 	break;
+
 	default:
 		echo "function is proved that it works";
 		break;
 
 	}
-}
+}*/
 /*
 function filterTime(){
 	$conn = connAll();
