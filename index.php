@@ -113,15 +113,15 @@ $tasks;
             $task = allTaskOrderdByList($value['id']);
             if(isset($_GET['filterButton'])){
                 echo "AHOE";
-                filterAscStatus($task['status']);
+                filterAscStatus();
             } 
             if(isset($_GET['inactive'])){
                 echo "Pog";
-                filterDescStatus($task['status']);
+                filterDescStatus();
             }
             if(isset($_GET['active'])){
                 echo "HELLO";
-                filterAscStatus($task['status']);
+                $task = filterAscStatus();
             }
             foreach($task as $values):?>
             <div class="task" id="taskId<?php echo $values["id"]; ?>" data-taskName="<?php echo $values['name'];?>" data-taskTime="<?php echo $values['time'];?>" data-taskStatus="<?php echo $values['status']?>" data-todoListId="<?php echo $value["id"];?>">

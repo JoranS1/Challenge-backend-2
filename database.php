@@ -36,11 +36,11 @@ function allTask(){
 	$rows = $result->fetchAll();
 	return $rows;
 }
-function allTaskOrderdByList($listId){
+function allTaskOrderdByList(){
 	$conn = connAll();
-	$query = "SELECT * FROM task WHERE listId = :listId";
+	$query = "SELECT * FROM task INNER JOIN todo ON task.listId = todo.id";
 	$result = $conn->prepare($query);
-	$result->execute([":listId" => $listId]);
+	$result->execute();
 	$rows = $result->fetchAll();
 	return $rows;
 }
@@ -99,18 +99,19 @@ function deleteTodo($id){
 	$query = $conn->prepare("DELETE FROM todo WHERE id = ?");
 	$query->execute([$id]);
 }
-function filterAscStatus($status){
+function filterAscStatus(){
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM `task` ORDER BY `task`.`status` ASC");
-	$query->execute([":status" => $status]);
+	$query = $conn->prepare("SELECT * FROM `task` WHERE status = 'active' ORDER BY `task`.`status` ASC");
+	$query->execute();
 	$result = $query->fetchAll();
+	print_r($result);
 	echo "Nani";
 	return $result;
 }
-function filterDescStatus($status){
+function filterDescStatus(){
 	$conn = connAll();
 	$query = $conn->prepare("SELECT * FROM `task` ORDER BY `task`.`status` DESC");
-	$query->execute([":status" => $status]);
+	$query->execute();
 	$result = $query->fetchAll();
 	echo "PEEPEE";
 	return $result;
