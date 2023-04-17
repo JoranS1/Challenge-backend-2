@@ -38,7 +38,7 @@ function allTask(){
 }
 function allTaskOrderdByList(){
 	$conn = connAll();
-	$query = "SELECT * FROM task INNER JOIN todo ON task.listId = todo.id";
+	$query = "SELECT * FROM task JOIN todo ON task.listId = todo.id";
 	$result = $conn->prepare($query);
 	$result->execute();
 	$rows = $result->fetchAll();
@@ -110,7 +110,7 @@ function filterAscStatus(){
 }
 function filterDescStatus(){
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM `task` ORDER BY `task`.`status` DESC");
+	$query = $conn->prepare("SELECT * FROM `task` WHERE status = 'inactive' ORDER BY `task`.`status` DESC");
 	$query->execute();
 	$result = $query->fetchAll();
 	echo "PEEPEE";
