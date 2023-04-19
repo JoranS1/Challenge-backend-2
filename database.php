@@ -36,11 +36,11 @@ function allTask(){
 	$rows = $result->fetchAll();
 	return $rows;
 }
-function allTaskOrderdByList(){
+function allTaskOrderdByList($listId){
 	$conn = connAll();
-	$query = "SELECT * FROM task JOIN todo ON task.listId = todo.id";
+	$query = "SELECT * FROM task WHERE listId = :listId";
 	$result = $conn->prepare($query);
-	$result->execute();
+	$result->execute([":listId" => $listId]);
 	$rows = $result->fetchAll();
 	return $rows;
 }
@@ -99,23 +99,23 @@ function deleteTodo($id){
 	$query = $conn->prepare("DELETE FROM todo WHERE id = ?");
 	$query->execute([$id]);
 }
-function filterAscStatus(){
+function filterAscStatus($listId){
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM `task` WHERE status = 'active' ORDER BY `task`.`status` ASC");
-	$query->execute();
+	$query = $conn->prepare("SELECT * FROM `task` WHERE status = 'active' AND listId = :listId ORDER BY `task`.`status` ASC");
+	$query->execute([":listId" => $listId]);
 	$result = $query->fetchAll();
-	print_r($result);
 	echo "Nani";
 	return $result;
 }
-function filterDescStatus(){
+function filterDescStatus($listId){
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM `task` WHERE status = 'inactive' ORDER BY `task`.`status` DESC");
-	$query->execute();
+	$query = $conn->prepare("SELECT * FROM `task` WHERE status = 'inactive' AND listId = :listId ORDER BY `task`.`status` DESC");
+	$query->execute([":listId" => $listId]);
 	$result = $query->fetchAll();
 	echo "PEEPEE";
 	return $result;
 	}
+
 /*function filterStatus($status){
 	switch($status){
 	case "inactive":
@@ -135,14 +135,22 @@ function filterDescStatus(){
 
 	}
 }*/
-/*
-function filterTime(){
+
+function filterTimeDesc(){
 	$conn = connAll();
 	$query = $conn->prepare("SELECT * FROM task ORDER BY time DESC");
 	$query->execute();
 	$result = $query->fetchAll();
 	return $result;
-}*/
+}
+
+function filterTimeAsc(){
+	$conn = connAll();
+	$query = $conn->prepare("SELECT * FROM task ORDER BY time ASC");
+	$query->execute();
+	$result = $query->fetchAll();
+	return $result;
+}
 
 //clean functions
 $taskId = clean($_POST['taskId']);

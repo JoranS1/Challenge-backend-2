@@ -1,7 +1,7 @@
 <?php 
 include_once 'database.php'; 
 $todo = allTodo();
-$task = allTaskOrderdByList();
+
 
     
 
@@ -69,6 +69,8 @@ $task = allTaskOrderdByList();
             <input type="submit" name="filterButton" value="filterButton" class="w3-button button w3-orange">
             <input type="submit" name="active" value="active" class="w3-button button w3-green">
             <input type="submit" name="inactive" value="inactive" class="w3-button button w3-red">
+            <input type="submit" name="time-ascending" value="time-ascending" class="w3-button button w3-red">
+            <input type="submit" name="time-descending" value="time-descending" class="w3-button button w3-red">
         </form>
     </div>
     <hr>
@@ -112,17 +114,18 @@ $task = allTaskOrderdByList();
                 </header>
                 <div class="w3-container flex-container" id="todoContainer<?php echo $value['id'];?>">
                     <?php 
+                    $task = allTaskOrderdByList($value["id"]);
             if(isset($_GET['filterButton'])){
                 echo "AHOE";
-                filterAscStatus();
+                filterAscStatus($value["id"]);
             } 
             if(isset($_GET['inactive'])){
                 echo "Pog";
-                filterDescStatus();
+                $task = filterDescStatus($value["id"]);
             }
             if(isset($_GET['active'])){
                 echo "HELLO";
-                $task = filterAscStatus();
+                $task = filterAscStatus($value["id"]);
             }
             foreach($task as $values):?>
                     <div class="task" id="taskId<?php echo $values["id"]; ?>"
