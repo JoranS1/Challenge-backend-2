@@ -69,8 +69,8 @@ $todo = allTodo();
             <input type="submit" name="filterButton" value="filterButton" class="w3-button button w3-orange">
             <input type="submit" name="active" value="active" class="w3-button button w3-green">
             <input type="submit" name="inactive" value="inactive" class="w3-button button w3-red">
-            <input type="submit" name="time-ascending" value="time-ascending" class="w3-button button w3-red">
-            <input type="submit" name="time-descending" value="time-descending" class="w3-button button w3-red">
+            <input type="submit" name="time-ascending" value="time-ascending" class="w3-button button w3-blue">
+            <input type="submit" name="time-descending" value="time-descending" class="w3-button button w3-pink">
         </form>
     </div>
     <hr>
@@ -126,6 +126,12 @@ $todo = allTodo();
             if(isset($_GET['active'])){
                 echo "HELLO";
                 $task = filterAscStatus($value["id"]);
+            }
+            if(isset($_GET['time-ascending'])){
+                filterTimeAsc();
+            }
+            if(isset($_GET['time-descending'])){
+                filterTimeDesc();
             }
             foreach($task as $values):?>
                     <div class="task" id="taskId<?php echo $values["id"]; ?>"
