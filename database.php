@@ -136,19 +136,21 @@ function filterDescStatus($listId){
 	}
 }*/
 
-function filterTimeDesc(){
+function filterTimeDesc($listId){
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM task ORDER BY time DESC");
-	$query->execute();
+	$query = $conn->prepare("SELECT * FROM task WHERE listId = :listId ORDER BY time DESC");
+	$query->execute([":listId" => $listId]);
 	$result = $query->fetchAll();
+	print_r($result);
 	return $result;
 }
 
-function filterTimeAsc(){
+function filterTimeAsc($listId){
 	$conn = connAll();
-	$query = $conn->prepare("SELECT * FROM task ORDER BY time ASC");
-	$query->execute();
+	$query = $conn->prepare("SELECT * FROM task WHERE listId = :listId ORDER BY time ASC");
+	$query->execute([":listId" => $listId]);
 	$result = $query->fetchAll();
+	print_r($result);
 	return $result;
 }
 

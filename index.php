@@ -69,8 +69,9 @@ $todo = allTodo();
             <input type="submit" name="filterButton" value="filterButton" class="w3-button button w3-orange">
             <input type="submit" name="active" value="active" class="w3-button button w3-green">
             <input type="submit" name="inactive" value="inactive" class="w3-button button w3-red">
-            <input type="submit" name="time-ascending" value="time-ascending" class="w3-button button w3-blue">
-            <input type="submit" name="time-descending" value="time-descending" class="w3-button button w3-pink">
+            <input type="submit" name="timeAscending" value="timeAscending" class="w3-button button w3-blue">
+            <input type="submit" name="timeDescending" value="timeDescending" class="w3-button button w3-pink">
+            
         </form>
     </div>
     <hr>
@@ -109,8 +110,6 @@ $todo = allTodo();
                         onclick="sortTodo(<?php echo $value['id']; ?>, 'status')">
                         <i class="fa-fa-calendar-check-o" aria-hidden="true"></i>kalender
                     </button>
-
-
                 </header>
                 <div class="w3-container flex-container" id="todoContainer<?php echo $value['id'];?>">
                     <?php 
@@ -127,11 +126,11 @@ $todo = allTodo();
                 echo "HELLO";
                 $task = filterAscStatus($value["id"]);
             }
-            if(isset($_GET['time-ascending'])){
-                filterTimeAsc();
+            if(isset($_GET['timeAscending'])){
+                filterTimeAsc($value["id"]);
             }
-            if(isset($_GET['time-descending'])){
-                filterTimeDesc();
+            if(isset($_GET['timeDescending'])){
+                filterTimeDesc($value["id"]);
             }
             foreach($task as $values):?>
                     <div class="task" id="taskId<?php echo $values["id"]; ?>"
