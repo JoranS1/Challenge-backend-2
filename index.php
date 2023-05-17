@@ -114,6 +114,7 @@ $todo = allTodo();
                 <div class="w3-container flex-container" id="todoContainer<?php echo $value['id'];?>">
                     <?php 
                     $task = allTaskOrderdByList($value["id"]);
+                    
             if(isset($_GET['filterButton'])){
                 echo "AHOE";
                 filterAscStatus($value["id"]);
@@ -127,10 +128,10 @@ $todo = allTodo();
                 $task = filterAscStatus($value["id"]);
             }
             if(isset($_GET['timeAscending'])){
-                filterTimeAsc($value["id"]);
+                $task = filterTimeAsc($value["id"]);
             }
             if(isset($_GET['timeDescending'])){
-                filterTimeDesc($value["id"]);
+               $task = filterTimeDesc($value["id"]);
             }
             foreach($task as $values):?>
                     <div class="task" id="taskId<?php echo $values["id"]; ?>"

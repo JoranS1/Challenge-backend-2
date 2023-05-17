@@ -141,7 +141,6 @@ function filterTimeDesc($listId){
 	$query = $conn->prepare("SELECT * FROM task WHERE listId = :listId ORDER BY time DESC");
 	$query->execute([":listId" => $listId]);
 	$result = $query->fetchAll();
-	print_r($result);
 	return $result;
 }
 
@@ -150,7 +149,6 @@ function filterTimeAsc($listId){
 	$query = $conn->prepare("SELECT * FROM task WHERE listId = :listId ORDER BY time ASC");
 	$query->execute([":listId" => $listId]);
 	$result = $query->fetchAll();
-	print_r($result);
 	return $result;
 }
 
